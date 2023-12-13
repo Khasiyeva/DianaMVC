@@ -1,0 +1,47 @@
+﻿@using DianaMVC.Models;
+@model List<Product>
+<div class="container">
+    <div class="d-flex" style="justify-content:space-between; align-items:center">
+
+        <div class="card-body">
+            <h2>Products</h2>
+            <a class="btn btn-primary" asp-controller="Product" asp-action="Create">Create</a>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Image</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.Price</td>
+
+                                <td>
+                                    <div style="width:100px">
+                                        <img width="100%" src="~/Upload/Products/@item.ImgUrl">
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-secondary" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                                    <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
