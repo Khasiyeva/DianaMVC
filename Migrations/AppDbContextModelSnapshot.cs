@@ -22,21 +22,6 @@ namespace DianaMVC.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ColorProduct", b =>
-                {
-                    b.Property<int>("ColorsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ColorsId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("ColorProduct");
-                });
-
             modelBuilder.Entity("DianaMVC.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -51,7 +36,7 @@ namespace DianaMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("DianaMVC.Models.Color", b =>
@@ -68,7 +53,7 @@ namespace DianaMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Color");
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("DianaMVC.Models.Material", b =>
@@ -85,7 +70,7 @@ namespace DianaMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Material");
+                    b.ToTable("Materials");
                 });
 
             modelBuilder.Entity("DianaMVC.Models.Product", b =>
@@ -103,7 +88,6 @@ namespace DianaMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImgUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -121,6 +105,29 @@ namespace DianaMVC.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("DianaMVC.Models.ProductColor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductColors");
                 });
 
             modelBuilder.Entity("DianaMVC.Models.ProductImage", b =>
@@ -145,7 +152,53 @@ namespace DianaMVC.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImage");
+                    b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("DianaMVC.Models.ProductMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaterialId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductMaterials");
+                });
+
+            modelBuilder.Entity("DianaMVC.Models.ProductSize", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("ProductSizes");
                 });
 
             modelBuilder.Entity("DianaMVC.Models.Size", b =>
@@ -158,56 +211,11 @@ namespace DianaMVC.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Size");
-                });
-
-            modelBuilder.Entity("MaterialProduct", b =>
-                {
-                    b.Property<int>("MaterialsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MaterialsId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("MaterialProduct");
-                });
-
-            modelBuilder.Entity("ProductSize", b =>
-                {
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SizesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductsId", "SizesId");
-
-                    b.HasIndex("SizesId");
-
-                    b.ToTable("ProductSize");
-                });
-
-            modelBuilder.Entity("ColorProduct", b =>
-                {
-                    b.HasOne("DianaMVC.Models.Color", null)
-                        .WithMany()
-                        .HasForeignKey("ColorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DianaMVC.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("DianaMVC.Models.Product", b =>
@@ -221,6 +229,25 @@ namespace DianaMVC.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("DianaMVC.Models.ProductColor", b =>
+                {
+                    b.HasOne("DianaMVC.Models.Color", "Color")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DianaMVC.Models.Product", "Product")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("DianaMVC.Models.ProductImage", b =>
                 {
                     b.HasOne("DianaMVC.Models.Product", "Product")
@@ -232,34 +259,42 @@ namespace DianaMVC.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("MaterialProduct", b =>
+            modelBuilder.Entity("DianaMVC.Models.ProductMaterial", b =>
                 {
-                    b.HasOne("DianaMVC.Models.Material", null)
-                        .WithMany()
-                        .HasForeignKey("MaterialsId")
+                    b.HasOne("DianaMVC.Models.Material", "Material")
+                        .WithMany("ProductMaterials")
+                        .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DianaMVC.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
+                    b.HasOne("DianaMVC.Models.Product", "Product")
+                        .WithMany("ProductMaterials")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Material");
+
+                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ProductSize", b =>
+            modelBuilder.Entity("DianaMVC.Models.ProductSize", b =>
                 {
-                    b.HasOne("DianaMVC.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
+                    b.HasOne("DianaMVC.Models.Product", "Product")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DianaMVC.Models.Size", null)
-                        .WithMany()
-                        .HasForeignKey("SizesId")
+                    b.HasOne("DianaMVC.Models.Size", "Size")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("DianaMVC.Models.Category", b =>
@@ -267,9 +302,30 @@ namespace DianaMVC.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("DianaMVC.Models.Color", b =>
+                {
+                    b.Navigation("ProductColors");
+                });
+
+            modelBuilder.Entity("DianaMVC.Models.Material", b =>
+                {
+                    b.Navigation("ProductMaterials");
+                });
+
             modelBuilder.Entity("DianaMVC.Models.Product", b =>
                 {
+                    b.Navigation("ProductColors");
+
                     b.Navigation("ProductImages");
+
+                    b.Navigation("ProductMaterials");
+
+                    b.Navigation("ProductSizes");
+                });
+
+            modelBuilder.Entity("DianaMVC.Models.Size", b =>
+                {
+                    b.Navigation("ProductSizes");
                 });
 #pragma warning restore 612, 618
         }

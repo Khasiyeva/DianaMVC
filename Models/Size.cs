@@ -3,7 +3,7 @@
     public class Size
     {
         public int Id { get; set; }
-        public char Name { get; set; }
-        public List<Product> Products { get; set; }
+        public string Name { get; set; }
+        public List<ProductSize> ProductSizes { get; set; }
     }
 }
