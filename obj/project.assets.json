@@ -11109,23 +11109,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\II novbe\\.nuget\\packages\\": {},
+    "C:\\Users\\Khadija\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\II novbe\\source\\repos\\DianaMVC\\DianaMVC.csproj",
+      "projectUniqueName": "C:\\Users\\Khadija\\OneDrive\\İş masası\\Diana\\DianaMVC\\DianaMVC.csproj",
       "projectName": "DianaMVC",
-      "projectPath": "C:\\Users\\II novbe\\source\\repos\\DianaMVC\\DianaMVC.csproj",
-      "packagesPath": "C:\\Users\\II novbe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\II novbe\\source\\repos\\DianaMVC\\obj\\",
+      "projectPath": "C:\\Users\\Khadija\\OneDrive\\İş masası\\Diana\\DianaMVC\\DianaMVC.csproj",
+      "packagesPath": "C:\\Users\\Khadija\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Khadija\\OneDrive\\İş masası\\Diana\\DianaMVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\II novbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Khadija\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11134,6 +11134,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
